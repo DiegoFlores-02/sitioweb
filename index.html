@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lil Peep | Biografía, Legado y Salud Mental</title>
+    <style>
+        /* Variables y Reseteo */
+        :root {
+            --bg-dark: #0f0d15;
+            --bg-card: #1a1625;
+            --primary: #f472b6;
+            --primary-hover: #db2777;
+            --secondary: #a855f7;
+            --accent: #f43f5e;
+            --success: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #a1a1aa;
+            --border: #2e2640;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           MENÚ DINÁMICO DE OPCIONES (CSS PURO)
+           ========================================= */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 13, 21, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--text-main);
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links > li > a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links > li > a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links > li > a:hover::after {
+            width: 100%;
+        }
+
+        /* Submenú desplegable dinámico */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            min-width: 220px;
+            list-style: none;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li a {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: rgba(244, 114, 182, 0.1);
+            color: var(--primary);
+            padding-left: 1.5rem;
+        }
+
+        /* =========================================
+           SECCIÓN PRINCIPAL (HERO)
+           ========================================= */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: radial-gradient(circle at top, #281d3d 0%, var(--bg-dark) 75%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #f472b6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: 0 auto 2rem;
+            color: var(--text-muted);
+            font-size: 1.15rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--bg-dark);
+            font-weight: 700;
+            padding: 0.85rem 2.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Contenedor General */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        /* =========================================
+           INFORMACIÓN BÁSICA (BIOGRAFÍA Y ESTILO)
+           ========================================= */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .info-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           PROBLEMAS Y SOLUCIONES
+           ========================================= */
+        .ps-section {
+            background-color: rgba(26, 22, 37, 0.5);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+        }
+
+        .ps-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .problem-box {
+            padding: 1.5rem 2rem;
+            border-left: 4px solid var(--accent);
+            background-color: rgba(244, 63, 94, 0.06);
+        }
+
+        .solution-box {
+            padding: 1.5rem 2rem;
+            border-left: 4px solid var(--success);
+            background-color: rgba(16, 185, 129, 0.06);
+            flex-grow: 1;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-problem {
+            background-color: rgba(244, 63, 94, 0.2);
+            color: #fda4af;
+        }
+
+        .badge-solution {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+        }
+
+        .ps-card h4 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .ps-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           FOOTER DE CONTACTO
+           ========================================= */
+        footer {
+            background-color: #09070d;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            color: var(--text-main);
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-col p, .footer-col li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            list-style: none;
+        }
+
+        .footer-col a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* =========================================
+           DISEÑO RESPONSIVE (MÓVILES)
+           ========================================= */
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-card);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0 2rem;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease, padding 0.4s ease;
+                border-bottom: 1px solid var(--border);
+                gap: 0;
+            }
+
+            #menu-toggle:checked ~ .nav-links {
+                max-height: 500px;
+                padding: 1rem 2rem;
+            }
+
+            .nav-links li {
+                width: 100%;
+                padding: 0.5rem 0;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                background-color: rgba(15, 13, 21, 0.5);
+                margin-top: 0.5rem;
+                padding-left: 1rem;
+            }
+
+            .ps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENCABEZADO Y MENÚ DINÁMICO -->
+    <header>
+        <nav class="navbar">
+            <a href="#inicio" class="logo">LIL<span>PEEP</span></a>
+            
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="#informacion">Información Básica &#9662;</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#biografia">Biografía y Orígenes</a></li>
+                        <li><a href="#estilo-musical">Estilo Emo Rap</a></li>
+                        <li><a href="#legado">Impacto Cultural</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#problemas-soluciones">Problemas y Soluciones &#9662;</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#caso-1">Depresión y Salud Mental</a></li>
+                        <li><a href="#caso-2">Adicción y Sobredosis</a></li>
+                        <li><a href="#caso-3">Presión de la Fama</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- PORTADA PRINCIPAL -->
+    <section id="inicio" class="hero">
+        <h1>Gustav Elijah Åhr: La Historia de Lil Peep</h1>
+        <p>Un recorrido por la vida, la revolución musical del emo rap, las batallas internas contra la depresión y las lecciones sobre salud mental y prevención de adicciones tras su trágico fallecimiento.</p>
+        <a href="#informacion" class="btn">Explorar Biografía</a>
+    </section>
+
+    <!-- SECCIÓN: INFORMACIÓN BÁSICA -->
+    <section id="informacion" class="container">
+        <h2 class="section-title">Información Básica</h2>
+        <p class="section-subtitle">Vida, carrera artística y el impacto generacional de un ícono contemporáneo.</p>
+
+        <div class="info-grid">
+            <article id="biografia" class="info-card">
+                <h3>01. Biografía y Cómo Vivió</h3>
+                <p>Nacido el 1 de noviembre de 1996 en Pensilvania y criado en Long Island, Nueva York, Gustav Åhr creció en un entorno complejo marcado por el divorcio de sus padres y una profunda sensación de aislamiento. Tras abandonar la secundaria y completar sus estudios en línea, se mudó a Los Ángeles con pocos recursos, durmiendo en sofás y grabando música desde su habitación antes de alcanzar la fama internacional.</p>
+            </article>
+
+            <article id="estilo-musical" class="info-card">
+                <h3>02. Pionero del Emo Rap</h3>
+                <p>Saltó a la fama en plataformas como SoundCloud a través de colectivos como Schemaposse y GothBoiClique. Su propuesta fusionó el hip-hop trap con samples de rock alternativo, pop punk y midwest emo. Letras crudas y honestas sobre el desamor, la ansiedad y el vacío emocional conectaron de inmediato con millones de jóvenes que se sentían incomprendidos.</p>
+            </article>
+
+            <article id="legado" class="info-card">
+                <h3>03. Contexto de su Fallecimiento</h3>
+                <p>Aunque muchas de sus letras abordaban pensamientos suicidas y desesperanza, su muerte el 15 de noviembre de 2017 en Tucson, Arizona —a los 21 años, dentro de su autobús de gira— fue dictaminada oficialmente como una sobredosis accidental causada por una combinación tóxica de fentanilo y alprazolam (Xanax) adulterados, reflejando una crisis silenciosa de autodestrucción.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: PROBLEMAS Y SOLUCIONES -->
+    <section id="problemas-soluciones" class="ps-section">
+        <div class="container">
+            <h2 class="section-title">Problemas y Soluciones</h2>
+            <p class="section-subtitle">Análisis de las crisis que marcaron su vida y las medidas necesarias para prevenir tragedias similares.</p>
+
+            <div class="ps-grid">
+                <!-- Par 1 -->
+                <div id="caso-1" class="ps-card">
+                    <div class="problem-box">
+                        <span class="badge badge-problem">Problema #1: Salud Mental no Tratada</span>
+                        <h4>Depresión severa y pensamientos suicidas</h4>
+                        <p>Lil Peep padecía depresión crónica y ansiedad severa. Durante años utilizó sus canciones como único desahogo, evitando acudir a especialistas por temor al estigma o por creer que el sufrimiento era parte inseparable de su identidad artística.</p>
+                    </div>
+                    <div class="solution-box">
+                        <span class="badge badge-solution">Solución y Prevención</span>
+                        <h4>Atención psicológica temprana y redes de apoyo</h4>
+                        <p>Normalizar la terapia psicológica y psiquiátrica sin tabúes. Hablar abiertamente con familiares, amigos o líneas de ayuda en momentos de crisis permite canalizar el dolor de forma segura y recibir acompañamiento profesional antes de llegar a un punto crítico.</p>
+                    </div>
+                </div>
+
+                <!-- Par 2 -->
+                <div id="caso-2" class="ps-card">
+                    <div class="problem-box">
+                        <span class="badge badge-problem">Problema #2: Automedicación y Sustancias</span>
+                        <h4>Abuso de fármacos y drogas adulteradas</h4>
+                        <p>Para mitigar su angustia emocional, recurrió al consumo frecuente de ansiolíticos y opioides sin supervisión médica. La circulación de pastillas falsificadas contaminadas con fentanilo convirtió su adicción en un riesgo mortal inmediato.</p>
+                    </div>
+                    <div class="solution-box">
+                        <span class="badge badge-solution">Solución y Prevención</span>
+                        <h4>Rehabilitación integral y reducción de daños</h4>
+                        <p>Sustituir la automedicación por tratamientos médicos supervisados, programas de desintoxicación y educación sobre los peligros letales de sustancias adulteradas. El entorno cercano debe intervenir activamente en lugar de normalizar el consumo.</p>
+                    </div>
+                </div>
+
+                <!-- Par 3 -->
+                <div id="caso-3" class="ps-card">
+                    <div class="problem-box">
+                        <span class="badge badge-problem">Problema #3: Explotación y Aislamiento</span>
+                        <h4>Presión de la industria y entornos tóxicos</h4>
+                        <p>El ascenso meteórico a la fama lo rodeó de personas que priorizaban el rendimiento comercial de sus giras por encima de su bienestar físico y emocional, agravando su agotamiento y soledad lejos de su familia.</p>
+                    </div>
+                    <div class="solution-box">
+                        <span class="badge badge-solution">Solución y Prevención</span>
+                        <h4>Priorizar el bienestar sobre la productividad</h4>
+                        <p>Establecer límites saludables en el entorno laboral y social, rodearse de personas genuinamente comprometidas con la salud de la persona y pausar cualquier actividad profesional cuando la integridad física o mental esté en riesgo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER DE CONTACTO -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Sobre este Proyecto</h3>
+                <p>Sitio informativo dedicado a documentar la vida y obra de Lil Peep, promoviendo la concienciación sobre la salud mental y la prevención de adicciones en los jóvenes.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Navegación Rápida</h3>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#informacion">Información Básica</a></li>
+                    <li><a href="#problemas-soluciones">Problemas y Soluciones</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Información de Contacto</h3>
+                <ul>
+                    <li><strong>Autor:</strong> Tu Nombre Completo</li>
+                    <li><strong>Correo:</strong> <a href="mailto:tu.correo@ejemplo.com">tu.correo@ejemplo.com</a></li>
+                    <li><strong>Teléfono:</strong> +503 0000-0000</li>
+                    <li><strong>Ubicación:</strong> San Miguel, El Salvador</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Todos los derechos reservados. Diseñado con HTML5 y CSS3 puro en un único archivo.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
